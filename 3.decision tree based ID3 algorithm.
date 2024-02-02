@@ -1,0 +1,19 @@
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier, export_text
+
+# Load the Iris dataset
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# Create and fit the Decision Tree model
+model = DecisionTreeClassifier(criterion='entropy')  # 'entropy' corresponds to ID3
+model.fit(X, y)
+
+# Display the decision tree
+tree_rules = export_text(model, feature_names=iris.feature_names)
+print("Decision Tree Rules:\n", tree_rules)
+
+# Classify a new sample
+new_sample = [[5.1, 3.5, 1.4, 0.2]]  # Replace this with your own data
+predicted_class = model.predict(new_sample)
+print("Predicted Class for the new sample:", iris.target_names[predicted_class[0]])
